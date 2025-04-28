@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chico's New Friend<3 </title>
+        <meta name="description" content="Jay has made me so that you can forgive him ">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffebee;
+            font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
+            overflow: hidden;
+            touch-action: manipulation;
+        }
+        
+        .container {
+            position: relative;
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+            padding: 10px;
+        }
+        
+        .kitten {
+            position: relative;
+            width: 280px;
+            height: 300px;
+            margin: 0 auto;
+            transform-origin: center;
+            transform: scale(0.9);
+        }
+        
+        @media (max-width: 480px) {
+            .kitten {
+                transform: scale(0.7);
+                height: 250px;
+            }
+            
+            .speech-bubble {
+                font-size: 14px !important;
+                padding: 10px !important;
+                right: -120px !important;
+                max-width: 150px !important;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .kitten {
+                transform: scale(0.6);
+                height: 200px;
+            }
+            
+            .speech-bubble {
+                right: -100px !important;
+                top: 10px !important;
+                max-width: 120px !important;
+            }
+            
+            .message-container {
+                margin-top: 0 !important;
+            }
+            
+            button {
+                padding: 8px 16px !important;
+                font-size: 14px !important;
+                margin: 5px 3px !important;
+            }
+        }
+        
+        .head {
+            position: absolute;
+            width: 180px;
+            height: 160px;
+            background-color: #ffb6c1;
+            border-radius: 50%;
+            top: 60px;
+            left: 50px;
+            z-index: 1;
+            transition: transform 0.3s;
+        }
+        
+        .ear {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-bottom: 60px solid #ffb6c1;
+            z-index: 0;
+        }
+        
+        .ear-left {
+            transform: rotate(-30deg);
+            top: 25px;
+            left: 40px;
+        }
+        
+        .ear-right {
+            transform: rotate(30deg);
+            top: 25px;
+            right: 40px;
+        }
+        
+        .ear-inner {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 40px solid #ff8da1;
+            z-index: 0;
+        }
+        
+        .ear-inner-left {
+            top: 35px;
+            left: 55px;
+            transform: rotate(-30deg);
+        }
+        
+        .ear-inner-right {
+            top: 35px;
+            right: 55px;
+            transform: rotate(30deg);
+        }
+        
+        .eye {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: #333;
+            border-radius: 50%;
+            top: 100px;
+            z-index: 2;
+            transition: all 0.3s;
+        }
+        
+        .eye-left {
+            left: 85px;
+        }
+        
+        .eye-right {
+            right: 85px;
+        }
+        
+        .eye-shine {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            border-radius: 50%;
+            top: 5px;
+            left: 5px;
+        }
+        
+        .muzzle {
+            position: absolute;
+            width: 100px;
+            height: 60px;
+            background-color: white;
+            border-radius: 50%;
+            top: 130px;
+            left: 90px;
+            z-index: 2;
+        }
+        
+        .nose {
+            position: absolute;
+            width: 20px;
+            height: 10px;
+            background-color: #ff758c;
+            border-radius: 50%;
+            top: 125px;
+            left: 130px;
+            z-index: 3;
+            transition: transform 0.3s;
+        }
+        
+        .mouth {
+            position: absolute;
+            width: 60px;
+            height: 10px;
+            border-bottom: 2px solid #333;
+            border-radius: 50%;
+            top: 145px;
+            left: 110px;
+            z-index: 3;
+            transition: all 0.3s;
+        }
+        
+        .whisker {
+            position: absolute;
+            width: 60px;
+            height: 2px;
+            background-color: #333;
+            z-index: 2;
+        }
+        
+        .whisker-left-1 {
+            top: 130px;
+            left: 55px;
+            transform: rotate(10deg);
+        }
+        
+        .whisker-left-2 {
+            top: 140px;
+            left: 50px;
+            transform: rotate(0deg);
+        }
+        
+        .whisker-left-3 {
+            top: 150px;
+            left: 55px;
+            transform: rotate(-10deg);
+        }
+        
+        .whisker-right-1 {
+            top: 130px;
+            right: 55px;
+            transform: rotate(-10deg);
+        }
+        
+        .whisker-right-2 {
+            top: 140px;
+            right: 50px;
+            transform: rotate(0deg);
+        }
+        
+        .whisker-right-3 {
+            top: 150px;
+            right: 55px;
+            transform: rotate(10deg);
+        }
+        
+        .speech-bubble {
+            position: absolute;
+            background-color: white;
+            border-radius: 20px;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            max-width: 200px;
+            top: 20px;
+            right: -150px;
+            z-index: 4;
+            transition: all 0.3s;
+            font-size: 18px;
+            opacity: 1;
+        }
+        
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-width: 15px 15px 15px 0;
+            border-style: solid;
+            border-color: transparent white transparent transparent;
+        }
+        
+        .hidden {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        
+        .paw {
+            position: absolute;
+            width: 50px;
+            height: 25px;
+            background-color: #ffb6c1;
+            border-radius: 25px 25px 0 0;
+            bottom: 0;
+            z-index: 1;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .paw-left {
+            left: 90px;
+            transform-origin: bottom left;
+        }
+        
+        .paw-right {
+            right: 90px;
+            transform-origin: bottom right;
+        }
+        
+        .paw:hover, .paw:active {
+            transform: translateY(-10px);
+        }
+        
+        .paw-pad {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: #ff8da1;
+            border-radius: 50%;
+            bottom: 2px;
+        }
+        
+        .paw-pad-1 {
+            left: 5px;
+        }
+        
+        .paw-pad-2 {
+            left: 25px;
+        }
+        
+        .paw-pad-3 {
+            left: 15px;
+            bottom: 12px;
+        }
+        
+        .tail {
+            position: absolute;
+            width: 80px;
+            height: 20px;
+            background-color: #ffb6c1;
+            border-radius: 10px;
+            bottom: 10px;
+            right: 30px;
+            transform: rotate(-20deg);
+            transform-origin: right center;
+            z-index: 0;
+            animation: tailWag 3s infinite ease-in-out;
+        }
+        
+        @keyframes tailWag {
+            0%, 100% { transform: rotate(-20deg); }
+            50% { transform: rotate(20deg); }
+        }
+        
+        .angry {
+            color: #ff4757;
+            font-weight: bold;
+        }
+        
+        .message-container {
+            margin-top: 30px;
+            font-size: 20px;
+            text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        button {
+            background-color: #ff8da1;
+            border: none;
+            border-radius: 30px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: all 0.3s;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        button:hover, button:active {
+            background-color: #ff758c;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="kitten" id="kitten">
+            <div class="ear ear-left"></div>
+            <div class="ear ear-right"></div>
+            <div class="ear-inner ear-inner-left"></div>
+            <div class="ear-inner ear-inner-right"></div>
+            <div class="head"></div>
+            <div class="eye eye-left">
+                <div class="eye-shine"></div>
+            </div>
+            <div class="eye eye-right">
+                <div class="eye-shine"></div>
+            </div>
+            <div class="muzzle"></div>
+            <div class="nose"></div>
+            <div class="mouth"></div>
+            <div class="whisker whisker-left-1"></div>
+            <div class="whisker whisker-left-2"></div>
+            <div class="whisker whisker-left-3"></div>
+            <div class="whisker whisker-right-1"></div>
+            <div class="whisker whisker-right-2"></div>
+            <div class="whisker whisker-right-3"></div>
+            <div class="paw paw-left">
+                <div class="paw-pad paw-pad-1"></div>
+                <div class="paw-pad paw-pad-2"></div>
+                <div class="paw-pad paw-pad-3"></div>
+            </div>
+            <div class="paw paw-right">
+                <div class="paw-pad paw-pad-1"></div>
+                <div class="paw-pad paw-pad-2"></div>
+                <div class="paw-pad paw-pad-3"></div>
+            </div>
+            <div class="tail"></div>
+            <div class="speech-bubble" id="speechBubble">Hey Chico, As you are angry on Jay. He has left me here to <span class="angry">keep a check on you</span>, hehehe</div>
+        </div>
+        
+        <div class="message-container">
+            <button id="petButton">Pet the kitten</button>
+            <button id="treatButton">Give a treat</button>
+            <button id="angryButton">Make angry</button>
+        </div>
+    </div>
+
+    <script>
+        const kitten = document.getElementById('kitten');
+        const head = document.querySelector('.head');
+        const nose = document.querySelector('.nose');
+        const mouth = document.querySelector('.mouth');
+        const eyes = document.querySelectorAll('.eye');
+        const speechBubble = document.getElementById('speechBubble');
+        const petButton = document.getElementById('petButton');
+        const treatButton = document.getElementById('treatButton');
+        const angryButton = document.getElementById('angryButton');
+        
+        // Define default speech bubble text
+        const defaultSpeechText = "Hey Chico, As you are angry on Jay. He has left me here to <span class='angry'>keep a check on you</span>, hehehe";
+        
+        // Track mouse/touch movement to make eyes follow cursor/finger
+        function updateEyesPosition(x, y) {
+            eyes.forEach(eye => {
+                const eyeRect = eye.getBoundingClientRect();
+                const eyeCenterX = eyeRect.left + eyeRect.width / 2;
+                const eyeCenterY = eyeRect.top + eyeRect.height / 2;
+                
+                const deltaX = x - eyeCenterX;
+                const deltaY = y - eyeCenterY;
+                
+                const angle = Math.atan2(deltaY, deltaX);
+                const maxMovement = 5;
+                
+                const moveX = Math.cos(angle) * maxMovement;
+                const moveY = Math.sin(angle) * maxMovement;
+                
+                const shine = eye.querySelector('.eye-shine');
+                shine.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            });
+        }
+        
+        // Mouse movement
+        document.addEventListener('mousemove', (e) => {
+            updateEyesPosition(e.clientX, e.clientY);
+        });
+        
+        // Touch movement
+        document.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            const touch = e.touches[0];
+            updateEyesPosition(touch.clientX, touch.clientY);
+        }, { passive: false });
+        
+        // Pet the kitten
+        petButton.addEventListener('click', () => {
+            head.style.transform = 'translateY(5px)';
+            nose.style.transform = 'scale(1.2)';
+            
+            // Happy face
+            mouth.style.borderBottom = '3px solid #333';
+            mouth.style.height = '15px';
+            
+            updateSpeechBubble("Purrrr... I still need to <span class='angry'>watch you</span> though!");
+            
+            setTimeout(() => {
+                head.style.transform = '';
+                nose.style.transform = '';
+                mouth.style.borderBottom = '2px solid #333';
+                mouth.style.height = '10px';
+                
+                // Reset to default text after 2 seconds
+                setTimeout(() => {
+                    updateSpeechBubble(defaultSpeechText);
+                }, 2000);
+            }, 1000);
+        });
+        
+        // Give a treat
+        treatButton.addEventListener('click', () => {
+            // Happy bounce animation
+            kitten.animate([
+                { transform: 'translateY(0)' },
+                { transform: 'translateY(-20px)' },
+                { transform: 'translateY(0)' }
+            ], {
+                duration: 500,
+                easing: 'ease-in-out'
+            });
+            
+            // Happy face
+            mouth.style.borderBottom = '3px solid #333';
+            mouth.style.height = '15px';
+            
+            updateSpeechBubble("Mmmm, treats! Maybe you're not so bad after all!");
+            
+            setTimeout(() => {
+                mouth.style.borderBottom = '2px solid #333';
+                mouth.style.height = '10px';
+                
+                // Reset to default text after 2 seconds
+                setTimeout(() => {
+                    updateSpeechBubble(defaultSpeechText);
+                }, 2000);
+            }, 1000);
+        });
+        
+        // Make angry
+        angryButton.addEventListener('click', () => {
+            // Angry face
+            eyes.forEach(eye => {
+                eye.style.transform = 'scaleY(0.5)';
+                eye.style.borderRadius = '50% 50% 0 0';
+            });
+            
+            mouth.style.borderBottom = '3px solid #333';
+            mouth.style.width = '40px';
+            mouth.style.left = '120px';
+            
+            updateSpeechBubble("<span class='angry'>JAY SAID YOU'VE BEEN NAUGHTY!</span> I'm watching you!");
+            
+            setTimeout(() => {
+                eyes.forEach(eye => {
+                    eye.style.transform = '';
+                    eye.style.borderRadius = '50%';
+                });
+                
+                mouth.style.borderBottom = '2px solid #333';
+                mouth.style.width = '60px';
+                mouth.style.left = '110px';
+                
+                // Reset to default text after 2 seconds
+                setTimeout(() => {
+                    updateSpeechBubble(defaultSpeechText);
+                }, 2000);
+            }, 1000);
+        });
+        
+        // Functions
+        function updateSpeechBubble(text) {
+            speechBubble.classList.add('hidden');
+            
+            setTimeout(() => {
+                speechBubble.innerHTML = text;
+                speechBubble.classList.remove('hidden');
+            }, 300);
+        }
+        
+        // Add some animation for paws
+        const pawLeft = document.querySelector('.paw-left');
+        const pawRight = document.querySelector('.paw-right');
+        
+        pawLeft.addEventListener('click', () => {
+            pawLeft.style.transform = 'translateY(-10px)';
+            setTimeout(() => {
+                pawLeft.style.transform = '';
+            }, 500);
+            updateSpeechBubble("Hey! Don't touch my paws!");
+            
+            // Reset to default text after 2 seconds
+            setTimeout(() => {
+                updateSpeechBubble(defaultSpeechText);
+            }, 2000);
+        });
+        
+        pawRight.addEventListener('click', () => {
+            pawRight.style.transform = 'translateY(-10px)';
+            setTimeout(() => {
+                pawRight.style.transform = '';
+            }, 500);
+            updateSpeechBubble("I said no touching the paws!");
+            
+            // Reset to default text after 2 seconds
+            setTimeout(() => {
+                updateSpeechBubble(defaultSpeechText);
+            }, 2000);
+        });
+        
+        // Tail interaction
+        const tail = document.querySelector('.tail');
+        
+        function speedUpTail() {
+            tail.style.animationDuration = '0.5s';
+            setTimeout(() => {
+                tail.style.animationDuration = '3s';
+            }, 1000);
+        }
+        
+        tail.addEventListener('mouseover', speedUpTail);
+        tail.addEventListener('touchstart', speedUpTail);
+        
+        // Fix for touch events on mobile - prevent zooming
+        document.addEventListener('touchstart', (e) => {
+            if (e.touches.length > 1) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+        
+        // Orientation change handler for mobile
+        window.addEventListener('orientationchange', () => {
+            // Reset any animations or states when orientation changes
+            setTimeout(() => {
+                document.body.style.height = window.innerHeight + 'px';
+            }, 200);
+        });
+        
+        // Initial height fix for mobile
+        document.body.style.height = window.innerHeight + 'px';
+    </script>
+</body>
+</html>
